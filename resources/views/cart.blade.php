@@ -12,7 +12,6 @@
         </div>
 
 
-
         <div class="card">
 
             <!-- Light table -->
@@ -29,75 +28,47 @@
                     </tr>
                     </thead>
                     <tbody class="list">
-                    {{--                    @foreach($produk as $p)--}}
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center"><img src="{{asset('assets/img/slider/slider1.jpg')}}"
-                                                     style="height: 100px; width: 100px; object-fit: cover"></td>
-                        <td class="text-center">Jesrey Persis Solo</td>
-                        <td class="text-center"> 3</td>
-                        <td class="text-center"> Rp 100.000</td>
-                        <td class="text-center"> Rp 300.000</td>
-
-                    </tr>
-                    {{--                    @endforeach--}}
+                    @foreach($carts as $v)
+                        <tr>
+                            <td class="text-center">{{ $loop->index + 1 }}</td>
+                            <td class="text-center"><img src="{{asset('/uploads/image')}} / {{ $v->product->url }}"
+                                                         style="height: 100px; width: 100px; object-fit: cover"></td>
+                            <td class="text-center">{{ $v->product->nama }}</td>
+                            <td class="text-center"> {{ $v->qty }}</td>
+                            <td class="text-center"> Rp {{ number_format($v->harga, 0, ',', '.') }}</td>
+                            <td class="text-center"> Rp {{ number_format($v->harga * $v->qty, 0, ',', '.') }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
 
-            <div class="col-12">
-                <div class="text-left mt-5">
-                    <h2><i class="mr-3" data-feather="twitch"></i>Total Harga & Pengiriman</h2>
-                    <div class="d-block bg-gradient-success mb-2" style="height: 3px; width: 300px; margin-top: 20px">
-                    </div>
-                </div>
-
-
-
-                <div class="col-lg-12">
-                    <div class="card p-3">
-
-{{--                        <div class="col-lg-12">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label  for="nama">Sub Total</label>--}}
-{{--                                <input type="text" readonly id="nama" name="nama"--}}
-{{--                                       class="form-control">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="col-lg-12 mb-3">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="url">Ongkir</label>--}}
-{{--                                <input type="number" readonly id="harga" name="harga"--}}
-{{--                                       class="form-control">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="harga">Total</label>
-                                <input type="number" readonly id="harga" name="harga"
-                                       class="form-control">
-                            </div>
-                        </div>
-
-{{--                        <div class="form-group col-lg-4">--}}
-{{--                            <label for="satuan">Kota</label>--}}
-{{--                            <select class="form-control" id="kota" name="kota">--}}
-{{--                                <option value="solo">Solo</option>--}}
-{{--                                <option value="sukoharjo">Sukoharjo</option>--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
-
-                        <div class="col-lg-2 mt-auto mb-auto ml-auto">
-                            <a href="/admin/transaksi/cetak" class="btn btn-md btn-success">Check Out</a>
-                        </div>
-
-                    </div>
-
+        <div class="col-12">
+            <div class="text-left mt-5">
+                <h2><i class="mr-3" data-feather="twitch"></i>Total Harga</h2>
+                <div class="d-block bg-gradient-success mb-2" style="height: 3px; width: 300px; margin-top: 20px">
                 </div>
             </div>
+
+
+            <div class="col-lg-12">
+                <div class="card p-3">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="harga">Total</label>
+                            <input type="number" readonly id="total" name="total"
+                                   class="form-control" value="{{ $subTotal }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 mt-auto mb-auto ml-auto">
+                        <button id="btn-cekout" type="button" class="btn btn-md btn-success">Check Out</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
         </div>
     </section>
 
@@ -106,5 +77,24 @@
 
 @section('script')
 
+<script>
+    $(document).ready(function () {
 
+        $('#btn-cekout').on('click', async function (e) {
+            e.preventDefault();
+            let data = {
+                '_token': '{{ csrf_token() }}',
+                nominal: $('#total').val(),
+            };
+            let res = await $.post('/ajax/cekout', data);
+            if (res['status'] === 200 && res['payload'] !== null) {
+                let id = res['payload'];
+                alert('Sewa Berhasil');
+                window.location.href = '/payment/'+id;
+            } else {
+                alert('Sewa gagal');
+            }
+        });
+    });
+</script>
 @endsection

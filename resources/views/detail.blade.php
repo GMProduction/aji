@@ -5,22 +5,27 @@
     <section class="container mt-5 mb-5">
         <div class="row">
             <div class="col-7">
-                <img src="{{asset('assets/img/slider/slider1.jpg')}}" style="width: 100%; height: 300px; object-fit: cover">
+                <img src="{{asset('/uploads/image')}} / {{ $product->url }}"
+                     style="width: 100%; height: 300px; object-fit: cover">
             </div>
 
             <div class="col-5">
-                <p style="font-size: 30px; font-weight: bold" class="mb-3 text-success">Nama</p>
-                <p style="font-size: 14px; font-weight: bold" class="text-black-50" >Deskripsi Panjang Deskripsi Panjang Deskripsi Panjang Deskripsi Panjang Deskripsi Panjang Deskripsi Panjang Deskripsi Panjang </p>
-                <a style="font-size: 20px; font-weight: bold" class="text-success">Rp. 100.000 /Pcs</a>
+                <p style="font-size: 30px; font-weight: bold" class="mb-3 text-success">{{ $product->nama }}</p>
+                <p style="font-size: 20px; font-weight: bold"
+                   class="mb-3 text-success">{{ $product->kategori->nama }}</p>
+                <p style="font-size: 14px; font-weight: bold" class="text-black-50">{{ $product->deskripsi }} </p>
+                <a style="font-size: 20px; font-weight: bold"
+                   class="text-success">Rp. {{ number_format($product->harga, 0, ',', '.') }}</a>
 
                 <div style="display: flex" class="mb-4 mt-3">
-                    <a href="#" class="btn btn-white mr-0 quantity__minus text-dark" ><span>-</span></a>
-                    <input name="quantity" id="qty" type="number"  class="text-center quantity__input" value="1" style="height: 45px; width: 70px; border: 1px solid #e8e3e3">
+                    <a href="#" class="btn btn-white mr-0 quantity__minus text-dark"><span>-</span></a>
+                    <input name="quantity" id="qty" type="number" class="text-center quantity__input" value="1"
+                           style="height: 45px; width: 70px; border: 1px solid #e8e3e3">
                     <a class="btn btn-success quantity__plus"><span class="text-white">+</span></a>
                 </div>
 
-                <button type="button" class="btn btn-outline-success mt-0" ><i data-feather="shopping-cart"></i></button>
-                <button type="button" class="btn btn-primary mt-0" >Pesan Sekarang</button>
+                <button type="button" class="btn btn-outline-success mt-0" onclick="addToCart(false)"><i data-feather="shopping-cart"></i></button>
+                <button type="button" class="btn btn-primary mt-0" onclick="addToCart(true)">Pesan Sekarang</button>
 
             </div>
         </div>
@@ -36,20 +41,22 @@
 
     <section class="container">
         <div class="row">
-            <div class="col-3">
-                <div class="card" style="height: 350px">
-                    <img class="card-img-top" src="{{asset('assets/img/slider/slider1.jpg')}}" alt="Card image cap"
-                         style="height: 150px; object-fit: cover; width: 100%">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0"></h5>
-                        <h4 class="card-title text-primary mt-0 mb-1 text-success">Rp. 50.000/ pcs</h4>
-                        <p class="card-text text-sm text-black-50" style="height: 50px; overflow: hidden">Deskripsi
-                            panjang Deskripsi panjang Deskripsi panjang Deskripsi panjang Deskripsi panjang</p>
-                        <a href="/product/" class="btn btn-success">Detail</a>
+            @foreach($products as $v)
+                <div class="col-3">
+                    <div class="card" style="height: 350px">
+                        <img class="card-img-top" src="{{asset('/uploads/image')}}/{{$v->url}}" alt="Card image cap"
+                             style="height: 150px; object-fit: cover; width: 100%">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">{{ $v->nama }}</h5>
+                            <h4 class="card-title text-primary mt-0 mb-1 text-success">
+                                Rp. {{ number_format($v->harga, 0, ',', '.') }}</h4>
+                            <p class="card-text text-sm text-black-50"
+                               style="height: 50px; overflow: hidden">{{ $v->deskripsi }}</p>
+                            <a href="/product/{{ $v->id }}" class="btn btn-success">Detail</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            @endforeach
 
         </div>
     </section>
@@ -58,11 +65,31 @@
 @section('script')
 
     <script>
-        $(document).ready(function() {
+        async function addToCart(redirect) {
+            let data = {
+                '_token': "{{ csrf_token() }}",
+                id: '{{ $product->id }}',
+                harga: '{{ $product->harga - $product->diskon}}',
+                qty: $('#qty').val(),
+                detail: '',
+                tipe: 'order',
+            };
+            try {
+                let res = await $.post('/ajax/addToCart', data);
+                if(redirect){
+                    window.location.href = '/cart'
+                }
+                alert('Pesanan Berhasil Masuk Ke Keranjang')
+            } catch (e) {
+                alert('Terjadi Kesalahan\nPesanan Gagal Masuk Ke Keranjang\n' + e.message);
+            }
+        }
+
+        $(document).ready(function () {
             const minus = $('.quantity__minus');
             const plus = $('.quantity__plus');
             const input = $('.quantity__input');
-            minus.click(function(e) {
+            minus.click(function (e) {
                 e.preventDefault();
                 var value = input.val();
                 if (value > 1) {
@@ -71,7 +98,7 @@
                 input.val(value);
             });
 
-            plus.click(function(e) {
+            plus.click(function (e) {
                 e.preventDefault();
                 var value = input.val();
                 value++;

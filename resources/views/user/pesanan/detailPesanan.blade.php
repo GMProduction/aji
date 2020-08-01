@@ -41,32 +41,42 @@
                                                             </th>
                                                             <th scope="col" class="sort" data-sort="completion">Qty
                                                             </th>
+                                                            <th scope="col" class="sort" data-sort="completion">Harga
+                                                            </th>
+                                                            <th scope="col" class="sort" data-sort="completion">Total
+                                                            </th>
 
 
                                                         </tr>
                                                         </thead>
                                                         <tbody class="list">
-                                                        <tr>
+                                                        @foreach($trans->cart as $v)
+                                                            <tr>
+                                                                <td class="budget">
+                                                                    {{ $loop->index + 1 }}
+                                                                </td>
+                                                                <td class="budget">
+                                                                    <img
+                                                                        src="{{asset('/images/uploads')}} / {{ $v->product->url }}"
+                                                                        href="{{asset('/images/uploads')}} / {{ $v->product->url }}"
+                                                                        style="height: 50px">
+                                                                </td>
+                                                                <td class="budget">
+                                                                    {{ $v->product->nama}}
+                                                                </td>
+                                                                <td class="budget">
+                                                                    {{ $v->qty }}
+                                                                </td>
+                                                                <td class="budget">
+                                                                    Rp {{ number_format($v->harga, 0, ',', '.')}}
+                                                                </td>
 
-                                                            <td class="budget">
-                                                                1
-                                                            </td>
+                                                                <td class="budget">
+                                                                    Rp {{ number_format($v->harga * $v->qty, 0, ',', '.')}}
+                                                                </td>
 
-                                                            <td class="budget">
-                                                                <img src="{{asset('assets/img/brand/logo.jpg')}}" href="{{asset('assets/img/brand/logo.jpg')}}"  style="height: 50px">
-                                                            </td>
-
-                                                            <td class="budget">
-                                                                Kursi
-                                                            </td>
-
-
-                                                            <td class="budget">
-                                                                12
-                                                            </td>
-
-
-                                                        </tr>
+                                                            </tr>
+                                                        @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -78,8 +88,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="/user/pemohon/update" method="POST">
-                                @csrf
+                            <form action="/user/profil/update" method="POST">
                                 <input type="hidden" name="id" value="">
                                 <h6 class="heading-small text-muted mb-1"></h6>
                                 <div class="pl-lg-4">
@@ -87,17 +96,39 @@
 
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="tanggalPinjam">Tanggal Pesan</label>
+                                                <label class="form-control-label" for="tanggalPinjam">Tanggal
+                                                    Pesan</label>
                                                 <input type="text" id="tanggalPinjam" name="tanggalPinjam" readonly
-                                                       class="form-control" value="">
+                                                       class="form-control" value="{{ $trans->created_at }}">
                                             </div>
                                         </div>
-
+                                        @php
+                                            $status = "Menunggu Konfirmasi"
+                                        @endphp
+                                        @switch($trans->status)
+                                            @case('0')
+                                            @php
+                                                $status = "Menunggu Konfirmasi"
+                                            @endphp
+                                            @break
+                                            @case('1')
+                                            @php
+                                                $status = "Di Terima"
+                                            @endphp
+                                            @break
+                                            @case('2')
+                                            @php
+                                                $status = "Di Tolak"
+                                            @endphp
+                                            @break
+                                            @default
+                                            @break
+                                        @endswitch
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="status">Status</label>
                                                 <input type="text" id="status" name="status" readonly
-                                                       class="form-control" value="">
+                                                       class="form-control" value="{{ $status }}">
                                             </div>
                                         </div>
 
@@ -105,7 +136,8 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="total">Total Harga</label>
                                                 <input type="text" id="total" name="total" readonly
-                                                       class="form-control" value="">
+                                                       class="form-control"
+                                                       value="Rp. {{ number_format($trans->nominal, 0, ',', '.') }}">
                                             </div>
                                         </div>
 
@@ -113,7 +145,9 @@
                                         <hr class="my-4"/>
                                         <!-- Description -->
                                         <div class="col-12 text-right">
-                                            <a type="submit" href="https://wa.me/62897123341?text=Saya%20ingin%20dengan%20menanyakan%20pesanan" class="btn btn-lg btn-success">Contact Admin</a>
+                                            <a type="submit"
+                                               href="https://wa.me/62897123341?text=Saya%20ingin%20dengan%20menanyakan%20pesanan"
+                                               class="btn btn-lg btn-success">Contact Admin</a>
                                         </div>
                                     </div>
                                 </div>

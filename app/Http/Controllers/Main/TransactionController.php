@@ -32,8 +32,6 @@ class TransactionController extends CustomController
                 'harga' => $this->postField('harga'),
                 'qty' => $this->postField('qty'),
                 'product_id' => $this->postField('id'),
-                'detail' => $this->postField('detail'),
-                'tipe' => $this->postField('tipe')
             ];
             $this->insert(Carts::class, $data);
             return $this->jsonResponse('success', 200);
@@ -45,23 +43,10 @@ class TransactionController extends CustomController
     public function cartPage()
     {
         $carts = Carts::with('product')->where('transactions_id', '=', null)->where('user_id', '=', auth()->id())->get();
-        $ongkir = Ongkir::all();
         $subTotal = $carts->sum(function ($v) {
             return ($v->harga * $v->qty);
         });
-//        return $carts->toArray();
-        return view('cart')->with(['carts' => $carts, 'subTotal' => $subTotal, 'ongkir' => $ongkir]);
-    }
-
-    public function getOngkir()
-    {
-        try {
-            $id = $this->field('id');
-            $voucher = Ongkir::where('id', '=', $id)->first();
-            return $this->jsonResponse($voucher, 200);
-        } catch (\Exception $e) {
-            return $this->jsonResponse('failed ' . $e->getMessage(), 500);
-        }
+        return view('cart')->with(['carts' => $carts, 'subTotal' => $subTotal]);
     }
 
     public function cekOut()
@@ -69,7 +54,6 @@ class TransactionController extends CustomController
         try {
             $data = [
                 'no_transaksi' => 'TR-' . \date('YmdHis'),
-                'ongkir' => $this->postField('ongkir'),
                 'nominal' => $this->postField('nominal'),
                 'status' => '0',
             ];

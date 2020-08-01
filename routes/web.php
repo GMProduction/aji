@@ -13,26 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
-
-Route::get('/detail', function () {
-    return view('detail');
-});
-
+Route::get('/', 'Main\MainController@index');
+Route::get('/product/{id}', 'Main\MainController@detail');
+Route::post('/ajax/addToCart', 'Main\TransactionController@addToCart');
+Route::get('/cart', 'Main\TransactionController@cartPage');
+Route::post('/ajax/cekout', 'Main\TransactionController@cekOut');
+Route::get('/payment/{id}', 'Main\TransactionController@pagePayment');
+Route::post('/payment/send', 'Main\TransactionController@send');
 Route::get('/kontak', function () {
     return view('kontak');
 });
 
-Route::get('/cart', function () {
-    return view('cart');
-});
-
-Route::get('/payment', function () {
-    return view('payment');
-});
 //ADMIN
 
 Route::get('/admin', function () {
@@ -104,24 +95,11 @@ Route::get('/pimpinan/user', function () {
 
 //USER
 
-
-Route::get('/user', function () {
-    return view('user.dashboard');
-});
-
-Route::get('/user/pesanan', function () {
-    return view('user.pesanan.pesanan');
-});
-
-Route::get('/user/detailpesanan', function () {
-    return view('user.pesanan.detailpesanan');
-});
-
-Route::get('/user/profil', function () {
-    return view('user.profil.profil');
-});
-
-
+Route::get('/user', 'Main\MainController@dashboard');
+Route::get('/user/pesanan', 'Main\TransactionController@pageTransaksi');
+Route::get('/user/pesanan/{id}', 'Main\TransactionController@detailHistory');
+Route::get('/user/profil', 'Main\MainController@profile');
+Route::post('/user/profil/update', 'Main\MainController@updateProfile');
 
 //LOGIN
 
@@ -132,7 +110,9 @@ Route::get('/login', function () {
 Route::get('/daftaruser', function () {
     return view('login.daftaruser');
 });
-
+Route::post('/post-register', 'Auth\AuthController@register');
+Route::post('/post-login', 'Auth\AuthController@login');
+Route::get('/logout', 'Auth\AuthController@logout');
 
 //CETAK
 

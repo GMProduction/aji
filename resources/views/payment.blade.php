@@ -30,19 +30,19 @@
                             </tr>
                             </thead>
                             <tbody class="list">
-                            {{--                    @foreach($produk as $p)--}}
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center"><img src="{{asset('assets/img/slider/slider1.jpg')}}"
-                                                             style="height: 100px; width: 100px; object-fit: cover"></td>
-                                <td class="text-center">Kursi Panjang</td>
-                                <td class="text-center"> 3</td>
-                                <td class="text-center"> pcs</td>
-                                <td class="text-center"> Rp 100.000</td>
-                                <td class="text-center"> Rp 300.000</td>
+                            @foreach($transaction->cart as $v)
+                                <tr>
+                                    <td class="text-center">{{ $loop->index + 1 }}</td>
+                                    <td class="text-center"><img src="{{ asset('/uploads/image') }}/{{ $v->product->url }}"
+                                                                 style="height: 100px; width: 100px; object-fit: cover">
+                                    </td>
+                                    <td class="text-center">{{ $v->product->nama }}</td>
+                                    <td class="text-center"> {{ $v->qty }}</td>
+                                    <td class="text-center"> Rp {{ number_format($v->harga, 0, ',', '.') }}</td>
+                                    <td class="text-center"> Rp {{ number_format($v->harga * $v->qty, 0, ',', '.') }}</td>
 
-                            </tr>
-                            {{--                    @endforeach--}}
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -55,13 +55,11 @@
                         <div class="row">
 
 
-
-
                             <div class="col-lg-10">
                                 <div class="form-group">
                                     <label class="form-control-label" for="total">Total Harga</label>
                                     <input type="text" id="total" name="total" readonly
-                                           class="form-control" value="">
+                                           class="form-control" value="{{ $transaction->nominal }}">
                                 </div>
                             </div>
                         </div>
@@ -81,8 +79,9 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data">
+                        <form method="POST" enctype="multipart/form-data" action="/payment/send">
                             @csrf
+                            <input type="hidden" name="id" value="{{ $transaction->id }}">
                             <h6 class="heading-small text-muted mb-4">Data</h6>
                             <div class="pl-lg-4">
                                 <div class="row">
@@ -90,8 +89,9 @@
                                     <div class="form-group col-lg-12">
                                         <label for="bank">Bank</label>
                                         <select class="form-control" id="bank" name="bank">
-                                            <option value="bca">BCA</option>
-                                            <option value="bri">BRI</option>
+                                            @foreach($vendors as $v)
+                                                <option value="{{ $v->id }}">{{ $v->nama }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -103,7 +103,6 @@
                                             <label class="custom-file-label" for="gambar">Select file</label>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 

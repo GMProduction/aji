@@ -39,21 +39,21 @@
         </div>
 
         <div class="row">
-            {{--            @foreach($products as $v)--}}
-            <div class="col-3">
-                <div class="card" style="height: 350px">
-                    <img class="card-img-top" src="{{asset('assets/img/slider/slider1.jpg')}}" alt="Card image cap"
-                         style="height: 150px; object-fit: cover; width: 100%">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0"></h5>
-                        <h4 class="card-title text-primary mt-0 mb-1 text-success">Rp. 50.000</h4>
-                        <p class="card-text text-sm text-black-50" style="height: 50px; overflow: hidden">Deskripsi
-                            panjang Deskripsi panjang Deskripsi panjang Deskripsi panjang Deskripsi panjang</p>
-                        <a href="/product/" class="btn btn-success">Detail</a>
+            @foreach($products as $v)
+                <div class="col-3">
+                    <div class="card" style="height: 350px">
+                        <img class="card-img-top" src="{{asset('/uploads/image')}}/{{$v->url}}" alt="Card image cap"
+                             style="height: 150px; object-fit: cover; width: 100%">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">{{ $v->nama }}</h5>
+                            <h4 class="card-title text-primary mt-0 mb-1 text-success">Rp. {{ number_format($v->harga, 0, ',', '.') }}</h4>
+                            <h6 class="card-title mb-0">{{ $v->kategori->nama }}</h6>
+                            <p class="card-text text-sm text-black-50" style="height: 50px; overflow: hidden">{{ $v->deskripsi }}</p>
+                            <a href="/product/{{ $v->id }}" class="btn btn-success">Detail</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {{--            @endforeach--}}
+            @endforeach
         </div>
     </section>
 
