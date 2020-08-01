@@ -44,16 +44,26 @@
                             </tr>
                             </thead>
                             <tbody class="list">
-                            {{--                            @foreach($kategori as $p)--}}
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center">Topil</td>
-                                <td class="text-center">009812039</td>
-                                <td class="text-center">Phone</td>
-                                <td class="text-center">email@gmail.com</td>
+                            @foreach($user as $u)
+                                <tr>
+                                    <td class="text-center">{{ $loop->index + 1 }}</td>
+                                    <td class="budget">
+                                        {{$u->nama}}
+                                    </td>
 
-                            </tr>
-                            {{--                            @endforeach--}}
+                                    <td class="budget">
+                                        {{$u->nama}}
+                                    </td>
+
+                                    <td class="budget">
+                                        {{$u->phone}}
+                                    </td>
+
+                                    <td class="budget">
+                                        {{$u->email}}
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -66,6 +76,10 @@
 @endsection
 
 @section('script')
-
+<script>
+    $(document).ready(function () {
+        $('#tabel').DataTable();
+    });
+</script>
 
 @endsection

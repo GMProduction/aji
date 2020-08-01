@@ -60,10 +60,11 @@ class AuthController extends CustomController
             'email'    => $this->postField('email'),
             'password' => Hash::make($this->postField('password')),
             'roles'    => $roles,
-            'nama' =>  $this->postField('nama'),
-            'phone' =>  $this->postField('phone'),
-            'alamat' =>  $this->postField('alamat'),
+//            'nama' =>  $this->postField('nama'),
+//            'phone' =>  $this->postField('phone'),
+//            'alamat' =>  $this->postField('alamat'),
         ];
+//        dump($data);die();
 
         if ($roles === 'admin') {
             $redirect = '/admin';

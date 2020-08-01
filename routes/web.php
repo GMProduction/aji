@@ -39,34 +39,27 @@ Route::get('/admin', function () {
     return view('admin.dashboard');
 });
 
-Route::get('/admin/produk', function () {
-    return view('admin.produk.produk');
-});
-
-Route::get('/admin/kategori', function () {
-    return view('admin.kategori.kategori');
-});
-
-Route::get('/admin/tambahkategori', function () {
-    return view('admin.kategori.tambahkategori');
-});
 
 
-Route::get('/admin/tambahproduk', function () {
-    return view('admin.produk.tambahproduk');
-});
+Route::get('/admin/kategori', 'Admin\KategoriController@index');
+Route::get('/admin/kategori/tambahkategori', 'Admin\KategoriController@addForm');
+Route::post('/admin/kategori/tambahkategori', 'Admin\KategoriController@addForm');
+Route::get('/admin/kategori/editkategori/{id}', 'Admin\KategoriController@editForm');
+Route::post('/admin/kategori/editkategori/{id}', 'Admin\KategoriController@editForm');
 
-Route::get('/admin/pesanan', function () {
-    return view('admin.pesanan.pesanan');
-});
+Route::get('/admin/produk', 'Admin\ProdukController@index');
+Route::get('/admin/produk/tambahproduk', 'Admin\ProdukController@addForm');
+Route::post('/admin/produk/tambahproduk', 'Admin\ProdukController@addForm');
+Route::get('/admin/produk/editproduk/{id}', 'Admin\ProdukController@editForm');
+Route::post('/admin/produk/editproduk/{id}', 'Admin\ProdukController@editForm');
+Route::post('admin/produk/hapus/{id}', 'Admin\ProdukController@hapus');
 
-Route::get('/admin/detailpesanan', function () {
-    return view('admin.pesanan.detailPesanan');
-});
+Route::get('/admin/pesanan', 'Admin\TransaksiController@index');
 
-Route::get('/admin/user', function () {
-    return view('admin.user.user');
-});
+Route::get('/admin/pesanan/detailpesanan/{id}', 'Admin\TransaksiController@detail');
+Route::post('/admin/pesanan/detailpesanan/{id}', 'Admin\TransaksiController@detail');
+
+Route::get('/admin/user', 'Admin\UserController@index');
 
 //PIMPINAN
 Route::get('/pimpinan', function () {
@@ -132,6 +125,10 @@ Route::get('/login', function () {
 Route::get('/daftaruser', function () {
     return view('login.daftaruser');
 });
+
+Route::post('/post-register', 'Auth\AuthController@register');
+Route::post('/post-login', 'Auth\AuthController@login');
+Route::get('/logout', 'Auth\AuthController@logout');
 
 
 //CETAK

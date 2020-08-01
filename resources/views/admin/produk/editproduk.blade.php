@@ -45,27 +45,38 @@
                             <div class="pl-lg-4">
                                 <div class="row">
 
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label  for="nama">Nama Produk</label>
-                                            <input type="text" required id="nama" name="nama" value="{{$produk->nama}}"
-                                                   class="form-control">
+                                            <label for="nama">Nama Produk</label>
+                                            <input type="text" required id="nama" name="nama"
+                                                   class="form-control" value="{{$produk->nama}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label for="kategori">Kategori</label>
+                                        <select class="form-control" id="kategori" name="kategori">
+                                            <option value="">Pilih Kategori</option>
+                                            @foreach($kategori as $k)
+                                                <option value="{{$k->id}}">{{$k->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="harga">Harga</label>
+                                            <input type="number" required id="harga" name="harga"
+                                                   class="form-control" value="{{$produk->harga}}">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label for="url">Harga</label>
-                                            <input type="number" required id="harga" name="harga" value="{{$produk->harga}}"
-                                                   class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="url">Deskripsi</label>
-                                            <input type="text" required id="deskripsi" name="deskripsi" value="{{$produk->deskripsi}}"
-                                                   class="form-control">
+                                            <label for="deskripsi">Deskripsi</label>
+                                            <input type="text" required id="deskripsi" name="deskripsi"
+                                                   class="form-control" value="{{$produk->deskripsi}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mb-3">
@@ -103,6 +114,12 @@
 @endsection
 
 @section('script')
+    <script>
+        $(document).ready(function () {
+            $('#kategori').val('{{$produk->kategori_id}}');
+            $('#kategori').formSelect();
+        })
+    </script>
 
 
 @endsection
