@@ -55,8 +55,10 @@
                                     <div class="form-group col-lg-4">
                                         <label for="kategori">Kategori</label>
                                         <select class="form-control" id="kategori" name="kategori">
-                                            <option value="kursi">Kursi</option>
-                                            <option value="meja">Meja</option>
+                                            <option value="">Pilih Kategori</option>
+                                            @foreach($kategori as $k)
+                                                <option value="{{$k->id}}">{{$k->nama}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 

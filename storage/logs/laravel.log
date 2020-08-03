@@ -3,7 +3,8 @@
 #0 C:\\PROJECT\\WEBSITE\\cilikan\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php(79): Illuminate\\View\\FileViewFinder->findInPaths('admin.user.user', Array)
 #1 C:\\PROJECT\\WEBSITE\\cilikan\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Factory.php(131): Illuminate\\View\\FileViewFinder->find('admin.user.user')
 #2 C:\\PROJECT\\WEBSITE\\cilikan\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(961): Illuminate\\View\\Factory->make('admin.user.user', Array, Array)
-#3 C:\\PROJECT\\WEBSITE\\cilikan\\aji\outes\\web.php(75): view('admin.user.user')
+#3 C:\\PROJECT\\WEBSITE\\cilikan\\aji\
+outes\\web.php(75): view('admin.user.user')
 #4 C:\\PROJECT\\WEBSITE\\cilikan\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(225): Illuminate\\Routing\\RouteFileRegistrar->{closure}()
 #5 C:\\PROJECT\\WEBSITE\\cilikan\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(199): Illuminate\\Routing\\Route->runCallable()
 #6 C:\\PROJECT\\WEBSITE\\cilikan\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(685): Illuminate\\Routing\\Route->run()
@@ -289,9 +290,12 @@
 #49 C:\\laravel\\aji\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #50 {main}
 "} 
-[2020-08-01 07:42:05] local.ERROR: Undefined variable: carts (View: C:\laravel\aji\resources\views\cart.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: carts (View: C:\\laravel\\aji\esources\\views\\cart.blade.php) at C:\\laravel\\aji\esources\\views/cart.blade.php:31)
+[2020-08-01 07:42:05] local.ERROR: Undefined variable: carts (View: C:\laravel\aji\resources\views\cart.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: carts (View: C:\\laravel\\aji\
+esources\\views\\cart.blade.php) at C:\\laravel\\aji\
+esources\\views/cart.blade.php:31)
 [stacktrace]
-#0 C:\\laravel\\aji\esources\\views/cart.blade.php(31): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\laravel\\\\aji\\\\...', 30, Array)
+#0 C:\\laravel\\aji\
+esources\\views/cart.blade.php(31): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\laravel\\\\aji\\\\...', 30, Array)
 #1 C:\\laravel\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(41): include('C:\\\\laravel\\\\aji\\\\...')
 #2 C:\\laravel\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(57): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\laravel\\\\aji\\\\...', Array)
 #3 C:\\laravel\\aji\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(37): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\laravel\\\\aji\\\\...', Array)
@@ -395,9 +399,12 @@
 #48 C:\\laravel\\aji\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
 "} 
-[2020-08-01 07:42:31] local.ERROR: Undefined variable: carts (View: C:\laravel\aji\resources\views\cart.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: carts (View: C:\\laravel\\aji\esources\\views\\cart.blade.php) at C:\\laravel\\aji\esources\\views/cart.blade.php:31)
+[2020-08-01 07:42:31] local.ERROR: Undefined variable: carts (View: C:\laravel\aji\resources\views\cart.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: carts (View: C:\\laravel\\aji\
+esources\\views\\cart.blade.php) at C:\\laravel\\aji\
+esources\\views/cart.blade.php:31)
 [stacktrace]
-#0 C:\\laravel\\aji\esources\\views/cart.blade.php(31): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\laravel\\\\aji\\\\...', 30, Array)
+#0 C:\\laravel\\aji\
+esources\\views/cart.blade.php(31): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\laravel\\\\aji\\\\...', 30, Array)
 #1 C:\\laravel\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(41): include('C:\\\\laravel\\\\aji\\\\...')
 #2 C:\\laravel\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(57): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\laravel\\\\aji\\\\...', Array)
 #3 C:\\laravel\\aji\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(37): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\laravel\\\\aji\\\\...', Array)
@@ -501,9 +508,12 @@
 #48 C:\\laravel\\aji\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
 "} 
-[2020-08-01 07:43:24] local.ERROR: Undefined variable: carts (View: C:\laravel\aji\resources\views\cart.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: carts (View: C:\\laravel\\aji\esources\\views\\cart.blade.php) at C:\\laravel\\aji\esources\\views/cart.blade.php:31)
+[2020-08-01 07:43:24] local.ERROR: Undefined variable: carts (View: C:\laravel\aji\resources\views\cart.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: carts (View: C:\\laravel\\aji\
+esources\\views\\cart.blade.php) at C:\\laravel\\aji\
+esources\\views/cart.blade.php:31)
 [stacktrace]
-#0 C:\\laravel\\aji\esources\\views/cart.blade.php(31): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\laravel\\\\aji\\\\...', 30, Array)
+#0 C:\\laravel\\aji\
+esources\\views/cart.blade.php(31): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\laravel\\\\aji\\\\...', 30, Array)
 #1 C:\\laravel\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(41): include('C:\\\\laravel\\\\aji\\\\...')
 #2 C:\\laravel\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(57): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\laravel\\\\aji\\\\...', Array)
 #3 C:\\laravel\\aji\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(37): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\laravel\\\\aji\\\\...', Array)
@@ -607,9 +617,12 @@
 #48 C:\\laravel\\aji\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
 "} 
-[2020-08-01 07:51:28] local.ERROR: Undefined variable: v (View: C:\laravel\aji\resources\views\payment.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: v (View: C:\\laravel\\aji\esources\\views\\payment.blade.php) at C:\\laravel\\aji\esources\\views/payment.blade.php:36)
+[2020-08-01 07:51:28] local.ERROR: Undefined variable: v (View: C:\laravel\aji\resources\views\payment.blade.php) {"userId":1,"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined variable: v (View: C:\\laravel\\aji\
+esources\\views\\payment.blade.php) at C:\\laravel\\aji\
+esources\\views/payment.blade.php:36)
 [stacktrace]
-#0 C:\\laravel\\aji\esources\\views/payment.blade.php(36): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\laravel\\\\aji\\\\...', 35, Array)
+#0 C:\\laravel\\aji\
+esources\\views/payment.blade.php(36): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\laravel\\\\aji\\\\...', 35, Array)
 #1 C:\\laravel\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(41): include('C:\\\\laravel\\\\aji\\\\...')
 #2 C:\\laravel\\aji\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(57): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\laravel\\\\aji\\\\...', Array)
 #3 C:\\laravel\\aji\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(37): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\laravel\\\\aji\\\\...', Array)

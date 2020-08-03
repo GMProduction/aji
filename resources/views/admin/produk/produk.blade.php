@@ -26,7 +26,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="/admin/tambahproduk" class="btn btn-md btn-neutral">Tambah Data</a>
+                        <a href="/admin/produk/tambahproduk" class="btn btn-md btn-neutral">Tambah Data</a>
                     </div>
                 </div>
             </div>
@@ -51,33 +51,33 @@
                                 <th scope="col" class="sort text-center" data-sort="completion">Kategori</th>
                                 <th scope="col" class="sort text-center" data-sort="completion">Harga</th>
                                 <th scope="col" class="sort text-center" data-sort="completion">Deskripsi</th>
+                                <th scope="col" class="sort text-center" data-sort="completion">Gambar</th>
                                 <th scope="col" class="sort text-center" data-sort="completion">Action</th>
                             </tr>
                             </thead>
                             <tbody class="list">
-                            {{--                            @foreach($produk as $p)--}}
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center">Kursi panjang</td>
-                                <td class="text-center">Kursi</td>
-                                <td class="text-center">Rp 100.000</td>
-                                <td class="text-center">Kursi nyaman buat nongkrong</td>
-                                <td class="text-center">
-                                    <img src="" height="50"></td>
-                                <td class="text-right">
+                            @foreach($produk as $p)
+                                <tr>
+                                    <td class="text-center">{{$loop->index+1}}</td>
+                                    <td class="text-center">{{$p->nama}}</td>
+                                    <td class="text-center">{{$p->kategori->nama}}</td>
+                                    <td class="text-center">Rp. {{number_format($p->harga, 0,',','.')}}</td>
+                                    <td class="text-center">{{$p->deskripsi}}</td>
+                                    <td class="text-center"><img src="{{asset('/uploads/image')}}/{{$p->url}}" height="50"></td>
+                                    <td class="text-center">
                                     <div class="dropdown">
-                                        <a class="btn btn-sm btn-icon-only btn-success text-light" href="#" role="button"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="">Edit</a>
-                                            <a class="dropdown-item" href="#!">Delete</a>
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                <a class="dropdown-item" href="/admin/produk/editproduk/{{$p->id}}">Edit</a>
+                                                <a class="dropdown-item" href="#!" onclick="hapus('{{$p->id}}','{{$p->nama}}')">Delete</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            {{--                            @endforeach--}}
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -94,7 +94,6 @@
         $(document).ready(function () {
             $('#tabel').DataTable();
         });
-
 
         function hapus(id, name) {
             Swal.fire({
